@@ -19,15 +19,30 @@ public class Pessoa {
     public Pessoa(String cpf, String nome, int idade, String email) {
     }
 
-    public void formatarTelefone(String telefone) {
+    public static void formatarEmail(String email) {
+        String regex = "^[\\w.+-]+@[\\w.-]+\\.[A-Za-z]{2,}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+
+        if(matcher.matches()) {
+            System.out.println(email);
+        } else  {
+            System.out.println("ERRO NO EMAIL DIGITADO");
+        }
+    }
+
+    public String formatarTelefone(String telefone) {
         String regex = ("(\\d{2})(\\d{4,5})(\\d{4})");
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(telefone);
 
         if(matcher.matches()) {
-            System.out.println(String.format("(%s) %s-%s", matcher.group(1), matcher.group(2), matcher.group(3)));
+            return String.format("(%s) %s-%s",
+                    matcher.group(1),
+                    matcher.group(2),
+                    matcher.group(3));
         } else {
-            System.out.println("ERRO NO NUMERO DIGITADO");
+            return "ERRO NO NUMERO DIGITADO";
         }
     }
 
